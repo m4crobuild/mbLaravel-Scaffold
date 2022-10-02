@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'mbApps') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -16,227 +16,103 @@
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
 </head>
-
 <body>
-<div class="d-flex" id="wrapper">
-    <!-- Sidebar -->
-    <div class="bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
-            <span class="fas fa-user-secret me-2"></span> {{ config('app.name', 'mbApps') }}
-        </div>
-        <div class="list-group list-group-flush my-3">
-            <a href="{{ route('home') }}" class="list-group-item list-group-item-action bg-transparent second-text active">
-                <span class="fas fa-tachometer-alt me-2"></span>Dashboard
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center">
+            <span class="fas fa-paperclip text-secondary fs-4 me-3" id="menu-toggle"></span>
+            <h2 class="navbar-brand"><a href="{{ route('home') }}" class="text-decoration-none text-white">{{ config('app.name', 'mbApps') }}</a></h2>
+            <a href="javascript:void(0);" data-bs-target="#sidebar" data-bs-toggle="collapse"
+               class="border rounded-3 p-1 text-decoration-none" title="Toggle Sidebar">
+                <span class="fas fa-arrow-alt-circle-left fa-lg py-2 p-1 text-secondary"></span>
             </a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <span class="fas fa-project-diagram me-2"></span>Projects</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <span class="fas fa-chart-line me-2"></span>Analytics</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <span class="fas fa-paperclip me-2"></span>Reports</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <span class="fas fa-shopping-cart me-2"></span>Store Mng</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <span class="fas fa-gift me-2"></span>Products</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <span class="fas fa-comment-dots me-2"></span>Chat</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <span class="fas fa-map-marker-alt me-2"></span>Outlet</a>
-            <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <span class="fas fa-power-off me-2"></span>{{ __('Logout') }}
-            </a>
-            <form action="{{ route('logout') }}" id="logout-form" method="POST" class="d-none">
-                @csrf
-            </form>
         </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
-            <div class="d-flex align-items-center">
-                <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                <h2 class="fs-2 m-0">Dashboard</h2>
-            </div>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
-                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user me-2"></i>{{ Auth::user()->username }}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Link
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
+                </li>
+            </ul>
+            <div class="d-flex px-2 nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-secondary fw-bold" href="#" id="navbarDropdown"
+                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user me-2"></i>{{ Auth::user()->username }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
             </div>
-        </nav>
-
-        <div class="container-fluid px-4">
-            <div class="row g-3 my-2">
-                <div class="col-md-3">
-                    <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                        <div>
-                            <h3 class="fs-2">720</h3>
-                            <p class="fs-5">Products</p>
-                        </div>
-                        <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                        <div>
-                            <h3 class="fs-2">4920</h3>
-                            <p class="fs-5">Sales</p>
-                        </div>
-                        <i
-                            class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                        <div>
-                            <h3 class="fs-2">3899</h3>
-                            <p class="fs-5">Delivery</p>
-                        </div>
-                        <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                        <div>
-                            <h3 class="fs-2">%25</h3>
-                            <p class="fs-5">Increase</p>
-                        </div>
-                        <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row my-5">
-                <h3 class="fs-4 mb-3">Recent Orders</h3>
-                <div class="col">
-                    <table class="table bg-white rounded shadow-sm  table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col" width="50">#</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Customer</th>
-                            <th scope="col">Price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Laptop</td>
-                            <td>Kenny</td>
-                            <td>$750</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Cell Phone</td>
-                            <td>Jenny</td>
-                            <td>$600</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Fridge</td>
-                            <td>Killy</td>
-                            <td>$300</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Books</td>
-                            <td>Filly</td>
-                            <td>$120</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td>Gold</td>
-                            <td>Bumbo</td>
-                            <td>$1800</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td>Pen</td>
-                            <td>Bilbo</td>
-                            <td>$75</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">8</th>
-                            <td>Notebook</td>
-                            <td>Frodo</td>
-                            <td>$36</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">9</th>
-                            <td>Dress</td>
-                            <td>Kimo</td>
-                            <td>$255</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">10</th>
-                            <td>Paint</td>
-                            <td>Zico</td>
-                            <td>$434</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">11</th>
-                            <td>Carpet</td>
-                            <td>Jeco</td>
-                            <td>$1236</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">12</th>
-                            <td>Food</td>
-                            <td>Haso</td>
-                            <td>$422</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
         </div>
     </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto px-0">
+            <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                <div id="mb-sidebar" class="list-group border-0 rounded-0 text-sm-start">
+                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                       data-bs-parent="#sidebar"><i class="fas fa-bootstrap"></i> <span>Item</span> </a>
+                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                       data-bs-parent="#sidebar"><i class="fas fa-film"></i> <span>Item</span></a>
+                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                       data-bs-parent="#sidebar"><i class="fas fa-heart"></i> <span>Item</span></a>
+                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                       data-bs-parent="#sidebar"><i class="fas fa-bricks"></i> <span>Item</span></a>
+                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                       data-bs-parent="#sidebar"><i class="fas fa-clock"></i> <span>Item</span></a>
+                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                       data-bs-parent="#sidebar"><i class="fas fa-archive"></i> <span>Item</span></a>
+                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                       data-bs-parent="#sidebar"><i class="fas fa-gear"></i> <span>Item</span></a>
+                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                       data-bs-parent="#sidebar"><i class="fas fa-calendar"></i> <span>Item</span></a>
+                    <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <span class="fas fa-power-off me-2"></span>{{ __('Logout') }}
+                    </a>
+                    <form action="{{ route('logout') }}" id="logout-form" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </div>
+            </div>
+        </div>
+        <main class="col ps-md-2 pt-2">
+            @yield('content')
+        </main>
+    </div>
 </div>
-<!-- /#page-content-wrapper -->
-</div>
-
-<script>
-    var el = document.getElementById("wrapper");
-    var toggleButton = document.getElementById("menu-toggle");
-
-    toggleButton.onclick = function () {
-        el.classList.toggle("toggled");
-    };
-</script>
 </body>
-
 </html>
